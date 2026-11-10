@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>clicOH Aliados</title>
+  <title>clicOH Points</title>
   <meta name="theme-color" content="#1F3864">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png">
@@ -17,16 +17,33 @@
     header h1 { margin: 0; font-size: 26px; }
     header p { margin: 4px 0 0; font-size: 14px; opacity: .85; }
     main { padding: 18px 16px 30px; max-width: 480px; margin: 0 auto; }
-    a.boton { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; border-radius: 16px;
-      padding: 22px 18px; margin-bottom: 16px; box-shadow: 0 3px 8px rgba(0,0,0,.15); }
-    a.boton:active { transform: scale(.98); }
+    .boton { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; border-radius: 16px; width: 100%;
+      padding: 22px 18px; margin-bottom: 16px; box-shadow: 0 3px 8px rgba(0,0,0,.15); border: none; text-align: left; font-family: inherit; cursor: pointer; }
+    .boton:active { transform: scale(.98); }
     .ico { font-size: 40px; line-height: 1; }
     .txt b { display: block; font-size: 21px; }
     .txt span { display: block; font-size: 14px; opacity: .9; margin-top: 4px; }
     .dev { background: #C00000; }
     .evi { background: #11632f; }
-    details { background: #fff; border-radius: 12px; padding: 14px 16px; margin-top: 10px; font-size: 14px; color: #333;
-      box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .card { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    label { display: block; font-size: 14px; font-weight: bold; margin: 14px 0 6px; }
+    label:first-child { margin-top: 0; }
+    input { width: 100%; font-size: 18px; padding: 14px; border-radius: 10px; border: 1px solid #c7ccd6; font-family: inherit; }
+    input:focus { outline: 2px solid #1F3864; }
+    .enviar { width: 100%; margin-top: 20px; background: #C00000; color: #fff; border: none; border-radius: 10px; font-weight: bold; font-size: 19px; padding: 18px; cursor: pointer; }
+    .enviar:disabled { opacity: .55; }
+    .sec { width: 100%; background: #fff; color: #1F3864; border: 2px solid #1F3864; border-radius: 10px; font-size: 16px; font-weight: bold; padding: 12px; margin-top: 14px; cursor: pointer; }
+    .volver { background: none; border: none; color: #1F3864; font-size: 16px; font-weight: bold; padding: 4px 0 14px; cursor: pointer; }
+    .msg { margin-top: 14px; padding: 12px; border-radius: 10px; font-weight: bold; text-align: center; display: none; }
+    .err { display: block; background: #fde2e1; color: #9b1c1c; }
+    .listo { text-align: center; }
+    .listo .ok { font-size: 56px; }
+    .listo h2 { color: #11632f; margin: 6px 0 12px; }
+    .listo table { width: 100%; border-collapse: collapse; font-size: 17px; text-align: left; }
+    .listo td { padding: 8px 4px; border-bottom: 1px solid #eee; }
+    .listo td:first-child { color: #555; }
+    .listo td:last-child { font-weight: bold; text-align: right; }
+    details { background: #fff; border-radius: 12px; padding: 14px 16px; margin-top: 10px; font-size: 14px; color: #333; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
     summary { font-weight: bold; color: #1F3864; cursor: pointer; }
     details ol { padding-left: 20px; margin: 10px 0 0; }
     details li { margin-bottom: 6px; }
@@ -36,27 +53,92 @@
 <body>
 <header>
   <h1>clicOH</h1>
-  <p>Herramientas para aliados</p>
+  <p>Herramientas para Points</p>
 </header>
 <main>
-  <a class="boton dev" href="https://andres2721.github.io/Escaner-clicOH/">
-    <div class="ico">📦</div>
-    <div class="txt"><b>Iniciar devolución</b><span>Escanear guías de devolución y entregarlas en bodega</span></div>
-  </a>
-  <a class="boton evi" href="https://script.google.com/macros/s/AKfycbwaZu6H9_ieQ9tDEUmfTepmeZ7G1X7xwJAnVUArpu1ingSCOd5iG5PZTGWZ9eQOwv-F/exec">
-    <div class="ico">📸</div>
-    <div class="txt"><b>Paquetes entregados / no entregados</b><span>Cargar la evidencia con foto en el momento</span></div>
-  </a>
+  <!-- ===== MENÚ ===== -->
+  <div id="menu">
+    <button class="boton dev" id="abrirDev">
+      <div class="ico">📦</div>
+      <div class="txt"><b>Iniciar devolución</b><span>Avisar a clicOH que tienes devoluciones por recoger</span></div>
+    </button>
+    <a class="boton evi" href="https://script.google.com/macros/s/AKfycbwaZu6H9_ieQ9tDEUmfTepmeZ7G1X7xwJAnVUArpu1ingSCOd5iG5PZTGWZ9eQOwv-F/exec">
+      <div class="ico">📸</div>
+      <div class="txt"><b>Paquetes entregados / no entregados</b><span>Cargar la evidencia con foto en el momento</span></div>
+    </a>
+    <details>
+      <summary>📲 Tener esta app fija en el celular</summary>
+      <ol>
+        <li><b>Android (Chrome):</b> toca los 3 puntos ⋮ arriba a la derecha → <b>Agregar a pantalla principal</b> (o <b>Instalar aplicación</b>) → Agregar.</li>
+        <li><b>iPhone (Safari):</b> toca el botón compartir ⬆️ abajo → <b>Agregar a inicio</b> → Agregar.</li>
+        <li>Te queda el ícono <b>clicOH</b> junto a tus otras apps.</li>
+      </ol>
+    </details>
+  </div>
 
-  <details>
-    <summary>📲 Tener este menú como app en el celular</summary>
-    <ol>
-      <li><b>Android (Chrome):</b> toca los 3 puntos ⋮ arriba a la derecha → <b>Agregar a pantalla principal</b> (o <b>Instalar app</b>) → Agregar.</li>
-      <li><b>iPhone (Safari):</b> toca el botón compartir ⬆️ abajo → <b>Agregar a inicio</b> → Agregar.</li>
-      <li>Te queda el ícono <b>clicOH</b> junto a tus otras apps. Ábrelo desde ahí cada vez.</li>
-    </ol>
-  </details>
+  <!-- ===== INICIAR DEVOLUCIÓN ===== -->
+  <div id="devolucion" style="display:none">
+    <button class="volver" id="volver">← Volver al menú</button>
+    <div class="card" id="form">
+      <label for="cp">Número de CP</label>
+      <input id="cp" inputmode="numeric" placeholder="Ej: 102" autocomplete="off">
+      <label for="fecha">Fecha de la ruta</label>
+      <input id="fecha" type="date">
+      <label for="cant">Número de devoluciones</label>
+      <input id="cant" type="number" inputmode="numeric" min="1" step="1" placeholder="Ej: 8">
+      <button class="enviar" id="btn">📦 Reportar devoluciones</button>
+      <div class="msg" id="msg"></div>
+    </div>
+    <div class="card listo" id="listo" style="display:none">
+      <div class="ok">✅</div>
+      <h2>Alerta enviada</h2>
+      <table>
+        <tr><td>CP</td><td id="rCp"></td></tr>
+        <tr><td>Fecha de la ruta</td><td id="rFecha"></td></tr>
+        <tr><td>Devoluciones</td><td id="rCant"></td></tr>
+        <tr><td>Hora del reporte</td><td id="rHora"></td></tr>
+      </table>
+      <button class="sec" id="otra">Reportar otra</button>
+      <button class="sec" id="alMenu">Volver al menú</button>
+    </div>
+  </div>
   <div class="pie">¿Dudas? Comunícate con tu líder de operaciones clicOH.</div>
 </main>
+<script>
+  // Mismo Apps Script de alertas (hoja "Alertas devoluciones" + Google Chat)
+  const URL_DRIVE = 'https://script.google.com/macros/s/AKfycbzNByRUWn1B9vepbYSYaXcicGC7i36A1PzN1wQoi8jcuA-YUnqvPr-L1fhIcQIJieMK/exec';
+  const $ = id => document.getElementById(id);
+  const hoyISO = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+  const fechaTexto = iso => iso.split('-').reverse().join('/');
+  try { $('cp').value = localStorage.getItem('clicoh_alerta_cp') || ''; } catch (e) {}
+
+  function ver(id) { $('menu').style.display = id === 'menu' ? 'block' : 'none'; $('devolucion').style.display = id === 'devolucion' ? 'block' : 'none'; window.scrollTo(0, 0); }
+  function nuevo() { $('cant').value = ''; $('fecha').value = hoyISO(); $('fecha').max = hoyISO(); $('msg').className = 'msg';
+    $('listo').style.display = 'none'; $('form').style.display = 'block'; }
+  $('abrirDev').onclick = () => { nuevo(); ver('devolucion'); };
+  $('volver').onclick = $('alMenu').onclick = () => ver('menu');
+  $('otra').onclick = () => { nuevo(); $('cant').focus(); };
+
+  function error(t) { $('msg').textContent = t; $('msg').className = 'msg err'; }
+  $('btn').onclick = async () => {
+    const cp = $('cp').value.trim(), fecha = $('fecha').value, cant = parseInt($('cant').value, 10);
+    if (!cp) return error('Escribe el número de tu CP');
+    if (!fecha) return error('Escoge la fecha de la ruta');
+    if (!(cant > 0)) return error('Escribe cuántas devoluciones tienes');
+    $('msg').className = 'msg'; $('btn').disabled = true; $('btn').textContent = 'Enviando…';
+    try {
+      const r = await (await fetch(URL_DRIVE, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ accion: 'alerta', cp: cp, fechaRuta: fecha, devoluciones: cant }) })).json();
+      if (!r.ok) throw new Error(r.msg || 'Error');
+      try { localStorage.setItem('clicoh_alerta_cp', cp); } catch (e) {}
+      $('rCp').textContent = cp; $('rFecha').textContent = fechaTexto(fecha); $('rCant').textContent = cant;
+      $('rHora').textContent = r.hora || new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+      $('form').style.display = 'none'; $('listo').style.display = 'block';
+    } catch (e) {
+      error('No se pudo enviar (' + e.message + '). Revisa tu conexión e intenta de nuevo.');
+    }
+    $('btn').disabled = false; $('btn').textContent = '📦 Reportar devoluciones';
+  };
+</script>
 </body>
 </html>
